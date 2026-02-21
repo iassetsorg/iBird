@@ -1,0 +1,47 @@
+{
+  "name": "ibird",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@buidlerlabs/hashgraph-react-wallets": "^2.5.0",
+    "@hashgraph/sdk": "^2.67.0",
+    "@types/formidable": "^3.4.5",
+    "@types/typed.js": "^2.0.0",
+    "@walletconnect/modal": "^2.7.0",
+    "@walletconnect/sign-client": "^2.21.4",
+    "@walletconnect/utils": "^2.21.4",
+    "arbundles": "^0.11.2",
+    "axios": "^1.10.0",
+    "emoji-picker-react": "^4.13.3",
+    "formidable": "^3.5.4",
+    "lucide-react": "^0.525.0",
+    "next": "15.3.5",
+    "next-themes": "^0.4.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-easy-crop": "^5.5.0",
+    "react-icons": "^5.5.0",
+    "react-image-crop": "^11.0.10",
+    "react-player": "^3.1.0",
+    "react-toastify": "^11.0.5",
+    "react-type-animation": "^3.2.0",
+    "typed.js": "^2.1.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.5",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

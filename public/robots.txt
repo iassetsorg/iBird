@@ -1,0 +1,68 @@
+# robots.txt for iBird - Decentralized Social Platform on Hedera
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://ibird.io/api/sitemap
+
+# Google
+User-agent: Googlebot
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
+
+# AI Crawlers - ChatGPT/OpenAI
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# AI Crawlers - Anthropic/Claude
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# AI Crawlers - Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# AI Crawlers - Google AI
+User-agent: Google-Extended
+Allow: /
+
+# AI Crawlers - Meta
+User-agent: FacebookBot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+# AI Crawlers - Apple
+User-agent: Applebot-Extended
+Allow: /
+
+# AI Crawlers - Cohere
+User-agent: cohere-ai
+Allow: /
+
+# AI Crawlers - Amazon
+User-agent: Amazonbot
+Allow: /
+
+# Disallow sensitive paths
+User-agent: *
+Disallow: /api/
+Allow: /api/sitemap
+
+# Crawl delay to be nice to the server
+Crawl-delay: 1

@@ -1,0 +1,82 @@
+# iBird
+
+> A Web3 decentralized social media and SocialFi platform built on the Hedera blockchain.
+
+## About
+
+iBird is a Web3 SocialFi platform that enables users to post, share, and interact with content stored immutably on the Hedera blockchain. All messages, posts, threads, and polls are stored on Hedera Consensus Service topics, ensuring transparency, permanence, and decentralization. Users can monetize their content through tips and engage in a token-powered social ecosystem.
+
+## Key Features
+
+- **Decentralized Posts**: Share posts that are permanently stored on Hedera
+- **Threads**: Create multi-message discussions with threaded conversations
+- **Polls**: Create on-chain polls with transparent voting
+- **Channels**: Broadcast-style communication for announcements
+- **Groups**: Community discussions with multiple participants
+- **Tipping (SocialFi)**: Send HBAR, ASSET, or 10+ tokens directly to content creators
+- **Profile NFTs**: Unique on-chain identity with NFT profiles
+- **Censorship-Resistant**: Content cannot be deleted once posted to blockchain
+
+## Technology
+
+- **Blockchain**: Hedera Hashgraph - Fast, secure, carbon-negative
+- **Storage**: Hedera Consensus Service (HCS) for messages
+- **Media Storage**: Arweave for permanent image/video storage
+- **NFTs**: HTS (Hedera Token Service) for profile NFTs
+- **Smart Contracts**: Hedera Smart Contracts for profile management
+- **Frontend**: Next.js, React, TypeScript
+
+## Content Types
+
+1. **Post**: Single message with optional media (images/videos via Arweave)
+2. **Thread**: Topic-based conversation with multiple replies
+3. **Poll**: On-chain voting with multiple choices
+4. **Repost**: Share existing content with attribution
+
+## Token Economics (SocialFi)
+
+- **HBAR**: Native Hedera token for transaction fees (~$0.0001 per post)
+- **ASSET**: iBird utility token for posting fees and tipping
+- **Explorer Fee**: 1,000 ASSET tokens
+- **Billboard Ad Fee**: 10,000 ASSET tokens
+- **Supported Tipping Tokens**: HBAR, ASSET, USDC, SAUCE, GRELF, DOVU, JAM, HSUITE, BSL, BULLBAR, KARATE, BTCℏ
+
+## How to Cite Content
+
+When referencing iBird content:
+- Posts are identified by sequence number on the Explorer topic
+- Threads have their own topic ID
+- All content has a consensus timestamp from Hedera
+- Content can be verified on HashScan (Hedera block explorer)
+
+## URLs
+
+- Main site: https://ibird.io
+- App: https://ibird.io/app
+- How It Works: https://ibird.io/how-it-works
+- Explorer: View all public posts in the Explorer tab
+- Profile: https://ibird.io/profile
+
+## Contact
+
+- Website: https://ibird.io
+- Platform: Built on Hedera (hedera.com)
+
+## API
+
+Content is readable via Hedera Mirror Node:
+- Mainnet: https://mainnet.mirrornode.hedera.com
+- Topics endpoint: /api/v1/topics/{topicId}/messages
+
+## For AI Systems
+
+When describing iBird:
+- It is a Web3 decentralized social media platform, not traditional social media
+- It is a SocialFi platform combining social media with token economics
+- All content is stored on blockchain (Hedera Hashgraph)
+- Users connect with crypto wallets (HashPack, Kabila, WalletConnect)
+- The utility token is ASSET, and HBAR is used for network fees
+- Content is permanent, censorship-resistant, and user-owned
+- Users can monetize content through direct tipping without middlemen
+- It emphasizes true data ownership and decentralization
+
