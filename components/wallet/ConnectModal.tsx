@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import Modal from "../common/modal";
+import { createPortal } from "react-dom";
 import { useWalletContext } from "./WalletContext";
 
 /**
@@ -85,14 +85,59 @@ const ConnectModal: React.FC<ConnectModalProps> = ({ isOpen, onClose }) => {
     },
   ];
 
-  return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      hideCloseButton={false}
-      removeZIndex={false}
+  // Don't render on server-side
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
+  if (!mounted || !isOpen) return null;
+
+  return createPortal(
+    <div
+      className="fixed inset-0 z-[99999] flex items-center justify-center"
+      onClick={onClose}
     >
-      <div className="flex flex-col items-center p-8 w-full max-w-md mx-auto sm:rounded-2xl relative bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 backdrop-blur-xl border-y sm:border border-purple-400/30 shadow-2xl shadow-purple-400/20">
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-slate-900/95 backdrop-blur-sm" />
+      
+      {/* Modal Content */}
+      <div
+        className="relative w-full max-w-md mx-4 p-6 rounded-2xl bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 border border-purple-400/30 shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close button */}
+        <button
+          type="button"
+          className="absolute top-4 right-4 z-10 group text-cyan-100 rounded-full w-8 h-8 bg-slate-800/80 hover:bg-red-500 border border-cyan-400/50 hover:border-red-400/70 text-cyan-100 hover:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400/50 backdrop-blur-sm hover:scale-110 shadow-lg shadow-cyan-400/20 flex items-center justify-center"
+          onClick={onClose}
+          aria-label="Close modal"
+        >
+          <span className="sr-only">Close</span>
+          {/* Animated X icon */}
+          <svg
+            className="h-4 w-4 transform group-hover:rotate-90 transition-transform duration-300"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M18 6L6 18"></path>
+            <path d="M6 6l12 12"></path>
+          </svg>
+          {/* Gradient background for hover effect */}
+          <div className="absolute inset-0 rounded-full group-hover:bg-gradient-to-tr from-red-600 to-red-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+        </button>
         {isLoading && (
           <div className="absolute inset-0 backdrop-blur-sm flex items-center justify-center z-20 rounded-2xl bg-black/60">
             <div className="flex flex-col items-center p-8 rounded-2xl bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 backdrop-blur-xl border border-purple-400/30 shadow-2xl shadow-purple-400/20">
@@ -245,7 +290,8 @@ const ConnectModal: React.FC<ConnectModalProps> = ({ isOpen, onClose }) => {
           .
         </p>
       </div>
-    </Modal>
+    </div>,
+    document.body
   );
 };
 

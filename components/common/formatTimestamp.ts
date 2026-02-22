@@ -15,16 +15,11 @@ export const formatTimestamp = (timestamp: string): string => {
     const now = new Date();
     const currentYear = now.getFullYear();
     const messageYear = date.getFullYear();
-    const currentMonth = now.getMonth();
-    const currentDate = now.getDate();
-    const messageMonth = date.getMonth();
-    const messageDate = date.getDate();
 
     // Calculate time difference
     const diffMs = now.getTime() - date.getTime();
     const diffMins = Math.floor(diffMs / 60000);
     const diffHours = Math.floor(diffMs / 3600000);
-    const diffDays = Math.floor(diffMs / 86400000);
 
     // Less than 1 minute: show as "now" or time
     if (diffMins < 1) {

@@ -115,16 +115,16 @@ const Modal: FC<ModalProps> = ({
 
       {/* Modal container with positioning */}
       <div
-        className={`relative w-full max-w-3xl mx-auto px-0 sm:px-4 ${
+        className={`relative w-full max-w-3xl mx-auto px-4 sm:px-4 ${
           !removeZIndex ? "z-[100000]" : "z-[11]"
         }`}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="relative bg-transparent sm:rounded-lg shadow-xl text-text overflow-hidden">
+        <div className="relative bg-transparent sm:rounded-lg shadow-xl text-text overflow-visible">
           {/* Animated close button with hover effects */}
           {!hideCloseButton && (
             <div
-              className={`absolute top-4 right-4 ${
+              className={`absolute -top-2 -right-2 ${
                 !removeZIndex ? "z-[100001]" : "z-[12]"
               }`}
             >
