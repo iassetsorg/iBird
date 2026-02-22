@@ -83,11 +83,11 @@ export default function AppPage() {
           style={{ animationDelay: "4s" }}
         />
 
-        <div className="relative z-10 pt-20 pb-16 px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 pt-20 pb-16 px-0 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto space-y-4">
             {/* Tab Navigation */}
             <nav
-              className={`transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              className={`px-4 sm:px-0 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                 }`}
               aria-label="App surfaces"
             >
@@ -114,10 +114,10 @@ export default function AppPage() {
 
             {/* Active Surface */}
             <section
-              className={`relative rounded-[32px] border border-white/10 bg-slate-900/70 backdrop-blur-3xl shadow-[0_0_80px_rgba(14,165,233,0.25)] transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+              className={`relative sm:rounded-[32px] border-y sm:border border-white/10 bg-slate-900/70 backdrop-blur-3xl shadow-[0_0_80px_rgba(14,165,233,0.25)] transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
                 }`}
             >
-              <div className="absolute inset-0 rounded-[32px] bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 sm:rounded-[32px] bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none" />
               <div className="relative">
                 {activeTab === "chats" && <ChatsManager />}
                 {activeTab === "explorer" && <Explorer />}
