@@ -1105,7 +1105,7 @@ const SendNewPoll = ({
   );
 
   return (
-    <div className="max-w-md mx-auto bg-background rounded-lg shadow-xl p-3 text-text">
+    <div className="max-w-md mx-auto w-full">
       {isEditing ? renderEditForm() : renderProcessingSteps()}
     </div>
   );

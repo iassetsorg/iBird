@@ -92,7 +92,7 @@ const ConnectModal: React.FC<ConnectModalProps> = ({ isOpen, onClose }) => {
       hideCloseButton={false}
       removeZIndex={false}
     >
-      <div className="flex flex-col items-center p-8 w-full max-w-md mx-auto rounded-2xl relative bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 backdrop-blur-xl border border-purple-400/30 shadow-2xl shadow-purple-400/20">
+      <div className="flex flex-col items-center p-8 w-full max-w-md mx-auto sm:rounded-2xl relative bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 backdrop-blur-xl border-y sm:border border-purple-400/30 shadow-2xl shadow-purple-400/20">
         {isLoading && (
           <div className="absolute inset-0 backdrop-blur-sm flex items-center justify-center z-20 rounded-2xl bg-black/60">
             <div className="flex flex-col items-center p-8 rounded-2xl bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 backdrop-blur-xl border border-purple-400/30 shadow-2xl shadow-purple-400/20">
@@ -203,11 +203,11 @@ const ConnectModal: React.FC<ConnectModalProps> = ({ isOpen, onClose }) => {
                     }}
                   />
                 </div>
-                <span className="flex-1 text-left font-mono font-semibold text-lg text-white">
+                <span className="flex-1 text-left font-mono font-semibold text-base sm:text-lg text-white">
                   {wallet.name}
                 </span>
                 <span
-                  className={`text-sm px-3 py-1 rounded-full font-mono font-medium bg-gradient-to-r ${wallet.gradient} text-white shadow-md`}
+                  className={`text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full font-mono font-medium bg-gradient-to-r ${wallet.gradient} text-white shadow-md}`}
                 >
                   {wallet.title}
                 </span>

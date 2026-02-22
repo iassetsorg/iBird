@@ -246,10 +246,11 @@ const UserProfile = ({ userAccountId }: UserProfileProps) => {
                         ""
                       )}`}
                       alt="Profile Banner"
-                      className="w-full h-auto object-contain"
-                      onLoad={() =>
-                        console.log("Direct banner image loaded!")
-                      }
+                      className="w-full h-auto object-contain transition-opacity duration-300 opacity-0"
+                      onLoad={(e) => {
+                        e.currentTarget.style.opacity = '1';
+                        console.log("Direct banner image loaded!");
+                      }}
                       onError={() =>
                         console.log("Direct banner image failed!")
                       }
@@ -277,8 +278,11 @@ const UserProfile = ({ userAccountId }: UserProfileProps) => {
                                 ""
                               )}`}
                               alt="Profile"
-                              className="w-full h-full object-cover rounded-full"
-                              onLoad={() => console.log("Direct image loaded!")}
+                              className="w-full h-full object-cover rounded-full transition-opacity duration-300 opacity-0"
+                              onLoad={(e) => {
+                                e.currentTarget.style.opacity = '1';
+                                console.log("Direct image loaded!");
+                              }}
                               onError={() =>
                                 console.log("Direct image failed!")
                               }
@@ -618,7 +622,7 @@ const UserProfile = ({ userAccountId }: UserProfileProps) => {
       {/* Ultra-Compact Section Modal */}
       {isSectionModalOpen && selectedModalContent && (
         <Modal isOpen={isSectionModalOpen} onClose={closeSectionModal}>
-          <div className="relative bg-gradient-to-br from-slate-900/90 via-purple-900/50 to-slate-900/90 backdrop-blur-xl border border-cyan-400/30 rounded-2xl p-3 max-w-5xl mx-auto shadow-2xl shadow-cyan-400/10 h-[85vh]">
+          <div className="relative bg-gradient-to-br from-slate-900/90 via-purple-900/50 to-slate-900/90 backdrop-blur-xl border-y sm:border border-cyan-400/30 sm:rounded-2xl p-3 max-w-5xl mx-auto shadow-2xl shadow-cyan-400/10 h-[85vh]">
             {/* Glow effect */}
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 via-purple-500/5 to-pink-500/5 rounded-2xl blur-xl" />
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback, useRef } from "react";
 import { toast } from "react-toastify";
 
 /**
@@ -104,24 +104,30 @@ const useGetData = (
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [nextLink, setNextLink] = useState<string | null>(initialNextLink);
-  const [isFetching, setIsFetching] = useState<boolean>(false);
-  const [loadingCleared, setLoadingCleared] = useState<boolean>(false);
-  const [minLoadingTimer, setMinLoadingTimer] = useState<NodeJS.Timeout | null>(
-    null
-  );
+  // Use refs for fetch guard and timer to avoid stale closure / infinite-loop issues.
+  // isFetchingRef is not state – writes to it never trigger a re-render, which is
+  // exactly what we want: the guard must be readable inside useCallback without
+  // causing the callback to be recreated on every state change.
+  const isFetchingRef = useRef<boolean>(false);
+  const minLoadingTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   /**
    * @function fetchMessages
-   * @description Fetches messages from either a topic ID or a specific API link
+   * @description Fetches messages from either a topic ID or a specific API link.
+   *
+   * Wrapped in useCallback with stable deps ([initialTopicId, isNew]) so that
+   * consumers can safely list it in their own useEffect dependency arrays without
+   * triggering an infinite-render loop.
+   *
    * @param {string | null} topicIdOrLink - Topic ID or API link to fetch messages from
    * @param {boolean} isRefresh - Whether this is a refresh operation (clears existing messages)
    */
-  const fetchMessages = async (
+  const fetchMessages = useCallback(async (
     topicIdOrLink: string | null,
     isRefresh = false
   ) => {
     // Prevent multiple simultaneous fetches
-    if (isFetching) {
+    if (isFetchingRef.current) {
       console.log("Fetch already in progress, skipping...");
       return;
     }
@@ -129,17 +135,18 @@ const useGetData = (
     // If no topic ID or link is provided, don't fetch and clear loading state
     if (!topicIdOrLink && !initialTopicId) {
       setLoading(false);
-      setIsFetching(false);
       return;
     }
 
     // Clear any existing minimum loading timer
-    if (minLoadingTimer) {
-      clearTimeout(minLoadingTimer);
+    if (minLoadingTimerRef.current) {
+      clearTimeout(minLoadingTimerRef.current);
+      minLoadingTimerRef.current = null;
     }
 
-    setIsFetching(true);
-    setLoadingCleared(false); // Reset the flag when starting a new fetch
+    isFetchingRef.current = true;
+    // Track within this invocation whether we already cleared loading early
+    let loadingCleared = false;
 
     // Only clear messages if it's a refresh or initial load (not pagination)
     if (isRefresh || !topicIdOrLink || !/^\/api\//.test(topicIdOrLink)) {
@@ -279,12 +286,8 @@ const useGetData = (
         // If there are no messages, ensure loading is set to false immediately
         if (responseData.length === 0) {
           setLoading(false);
-          setIsFetching(false);
-          setLoadingCleared(true); // Mark that loading has been cleared
-          if (minLoadingTimer) {
-            clearTimeout(minLoadingTimer);
-            setMinLoadingTimer(null);
-          }
+          isFetchingRef.current = false;
+          loadingCleared = true;
         }
       } else if (response.status === 404) {
         const networkType =
@@ -294,12 +297,8 @@ const useGetData = (
         setNextLink(null);
         // Clear loading state immediately for 404 errors
         setLoading(false);
-        setIsFetching(false);
-        setLoadingCleared(true); // Mark that loading has been cleared
-        if (minLoadingTimer) {
-          clearTimeout(minLoadingTimer);
-          setMinLoadingTimer(null);
-        }
+        isFetchingRef.current = false;
+        loadingCleared = true;
       } else {
         const networkType =
           process.env.NEXT_PUBLIC_NETWORK === "mainnet" ? "mainnet" : "testnet";
@@ -312,12 +311,8 @@ const useGetData = (
         );
         // Clear loading state immediately for other errors
         setLoading(false);
-        setIsFetching(false);
-        setLoadingCleared(true); // Mark that loading has been cleared
-        if (minLoadingTimer) {
-          clearTimeout(minLoadingTimer);
-          setMinLoadingTimer(null);
-        }
+        isFetchingRef.current = false;
+        loadingCleared = true;
       }
     } catch (error: unknown) {
       const errorMessage =
@@ -326,26 +321,20 @@ const useGetData = (
       console.error("Error fetching messages:", error);
       // Clear loading state immediately for network errors
       setLoading(false);
-      setIsFetching(false);
-      setLoadingCleared(true); // Mark that loading has been cleared
-      if (minLoadingTimer) {
-        clearTimeout(minLoadingTimer);
-        setMinLoadingTimer(null);
-      }
+      isFetchingRef.current = false;
+      loadingCleared = true;
     } finally {
-      // Only set loading state if we haven't already cleared it
-      // This prevents overriding the immediate loading state set when there are no messages
+      // Only set loading state if we haven't already cleared it.
+      // This prevents overriding the immediate loading state set when there are no messages.
       if (!loadingCleared) {
         // Ensure minimum loading time to prevent flickering
-        const minTimer = setTimeout(() => {
+        minLoadingTimerRef.current = setTimeout(() => {
           setLoading(false);
-          setIsFetching(false);
+          isFetchingRef.current = false;
         }, 300); // 300ms minimum loading time
-
-        setMinLoadingTimer(minTimer);
       }
     }
-  };
+  }, [initialTopicId, isNew]);
 
   return {
     messages,

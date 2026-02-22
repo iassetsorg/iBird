@@ -403,7 +403,7 @@ function GroupView({ groupId, groupName, groupMedia, isFollowed = false, onBack 
         )}
 
         {/* Message list - match explorer layout */}
-        <div className="space-y-6 px-0 py-4 sm:p-6">
+        <div className="space-y-4 sm:space-y-6 px-0 py-4 sm:px-6">
           {allMessages
             .filter((message) => {
               if (!message.Type) return false;

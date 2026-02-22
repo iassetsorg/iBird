@@ -51,7 +51,7 @@ function ReadSharedThread() {
       <SEOHead seoConfig={seoConfig} />
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         {/* Container for the thread content with enhanced styling and mobile optimization */}
-        <div className="bg-gradient-to-br from-slate-900 via-cyan-900/20 to-slate-900 backdrop-blur-xl p-4 sm:p-6 rounded-2xl border border-cyan-400/30 shadow-2xl shadow-cyan-400/20 max-w-4xl max-h-[90vh] overflow-y-auto">
+        <div className="bg-gradient-to-br from-slate-900 via-cyan-900/20 to-slate-900 backdrop-blur-xl p-0 sm:p-6 sm:rounded-2xl border-y sm:border border-cyan-400/30 shadow-2xl shadow-cyan-400/20 max-w-4xl max-h-[90vh] overflow-y-auto">
           <ReadThread
             topicId={topicIdVar}
             initialExpandedPosts={true}

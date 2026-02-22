@@ -8,6 +8,7 @@
  */
 
 import React, { useEffect, useRef, useCallback, useState } from "react";
+import { createPortal } from "react-dom";
 import { useRouter } from "next/router";
 import useGetData from "../hooks/use_get_data";
 import useGetProfile from "../hooks/use_get_profile";
@@ -189,71 +190,79 @@ function Billboard() {
         return () => unsubscribe();
     }, [triggerRefresh]);
 
+    const [isMounted, setIsMounted] = useState(false);
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
     // Generate SEO configuration for billboard page
     const billboardSEO = generateSEOConfig("explore");
+
+    const postAdButton = (
+        <div className="fixed bottom-6 left-6 sm:bottom-10 sm:left-10 z-50">
+            {/* Pulse animation ring for attention */}
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-yellow-400 to-orange-500 opacity-20 animate-ping" />
+
+            <button
+                onClick={handlePostAd}
+                className="
+                    relative
+                    inline-flex items-center justify-center
+                    px-6 py-3
+                    text-base font-mono font-semibold text-white
+                    rounded-2xl
+                    transition-all duration-300
+                    hover:scale-[1.05]
+                    active:scale-[0.95]
+                    focus:outline-none
+                    focus:ring-4 focus:ring-yellow-400/30
+                    overflow-hidden
+                    group
+                    bg-gradient-to-br from-slate-900 via-yellow-900 to-slate-900
+                    backdrop-blur-xl
+                    border border-yellow-400/40
+                    shadow-2xl shadow-yellow-400/25
+                    hover:border-yellow-400/70
+                    hover:shadow-yellow-400/40
+                    hover:shadow-2xl
+                    before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/5 before:to-transparent before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700
+                "
+                aria-label="Post Ad"
+            >
+                {/* Enhanced gradient overlay on hover */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-300 bg-gradient-to-r from-yellow-500 via-orange-500 to-yellow-600" />
+
+                {/* Button content */}
+                <div className="relative flex items-center gap-3">
+                    <span className="hidden sm:inline font-mono font-semibold text-white group-hover:text-yellow-100 transition-colors duration-300">
+                        Post Ad
+                    </span>
+                    <div className="w-6 h-6 flex items-center justify-center">
+                        <svg className="w-5 h-5 text-yellow-400 group-hover:text-yellow-200 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                        </svg>
+                    </div>
+                </div>
+
+                {/* Connection status indicator */}
+                <div
+                    className={`absolute -top-1 -right-1 w-3 h-3 rounded-full border-2 border-slate-900 ${isConnected ? "bg-green-400" : "bg-red-400"
+                        }`}
+                />
+            </button>
+        </div>
+    );
 
     return (
         <>
             <SEOHead seoConfig={billboardSEO} />
 
-            {/* Post Ad Button - Fixed position like New Message */}
-            <div className="fixed bottom-24 left-6 z-50">
-                {/* Pulse animation ring for attention */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-yellow-400 to-orange-500 opacity-20 animate-ping" />
-
-                <button
-                    onClick={handlePostAd}
-                    className="
-                        relative
-                        inline-flex items-center justify-center
-                        px-6 py-3
-                        text-base font-mono font-semibold text-white
-                        rounded-2xl
-                        transition-all duration-300
-                        hover:scale-[1.05]
-                        active:scale-[0.95]
-                        focus:outline-none
-                        focus:ring-4 focus:ring-yellow-400/30
-                        overflow-hidden
-                        group
-                        bg-gradient-to-br from-slate-900 via-yellow-900 to-slate-900
-                        backdrop-blur-xl
-                        border border-yellow-400/40
-                        shadow-2xl shadow-yellow-400/25
-                        hover:border-yellow-400/70
-                        hover:shadow-yellow-400/40
-                        hover:shadow-2xl
-                        before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/5 before:to-transparent before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700
-                    "
-                    aria-label="Post Ad"
-                >
-                    {/* Enhanced gradient overlay on hover */}
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-300 bg-gradient-to-r from-yellow-500 via-orange-500 to-yellow-600" />
-
-                    {/* Button content */}
-                    <div className="relative flex items-center gap-3">
-                        <span className="hidden sm:inline font-mono font-semibold text-white group-hover:text-yellow-100 transition-colors duration-300">
-                            Post Ad
-                        </span>
-                        <div className="w-6 h-6 flex items-center justify-center">
-                            <svg className="w-5 h-5 text-yellow-400 group-hover:text-yellow-200 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                            </svg>
-                        </div>
-                    </div>
-
-                    {/* Connection status indicator */}
-                    <div
-                        className={`absolute -top-1 -right-1 w-3 h-3 rounded-full border-2 border-slate-900 ${isConnected ? "bg-green-400" : "bg-red-400"
-                            }`}
-                    />
-                </button>
-            </div>
+            {isMounted && typeof document !== "undefined" && createPortal(postAdButton, document.body)}
 
             <div
                 ref={scrollRef}
                 onScroll={handleScroll}
-                className="relative w-full h-[calc(100vh-4rem)] bg-background pt-4 px-0 sm:p-6 text-text
+                className="relative w-full h-[calc(100vh-4rem)] bg-background pt-4 px-0 sm:px-6 text-text
          overflow-y-scroll"
             >
                 {/* Initial loading state */}
@@ -304,7 +313,7 @@ function Billboard() {
                 )}
 
                 {/* Message list - Only show Ad type messages */}
-                <div className="space-y-6">
+                <div className="space-y-4 sm:space-y-6">
                     {allMessages
                         .filter((message: Message) =>
                             // Only render Ad type messages in billboard

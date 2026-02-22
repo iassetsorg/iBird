@@ -1031,7 +1031,7 @@ const UpdateProfile = ({ onClose }: { onClose: () => void }) => {
    * Displays preview of changes and step-by-step update buttons
    */
   const renderProcessingSteps = () => (
-    <div className="p-4 h-[80vh] flex flex-col">
+    <div className="p-4 h-[80vh] flex flex-col bg-slate-900/80 backdrop-blur-md sm:rounded-2xl border-y sm:border border-cyan-400/50 overflow-hidden">
       <div className="mb-6">
         <div className="flex items-center justify-between mb-3">
           <h1 className="text-2xl font-mono text-cyan-400">
@@ -1268,7 +1268,7 @@ const UpdateProfile = ({ onClose }: { onClose: () => void }) => {
    * Includes inputs for name, bio, website, and profile picture
    */
   const renderEditForm = () => (
-    <div className="flex flex-col max-h-[80vh] bg-slate-900/80 backdrop-blur-md rounded-2xl overflow-hidden">
+    <div className="flex flex-col max-h-[80vh] bg-slate-900/80 backdrop-blur-md sm:rounded-2xl border-y sm:border border-cyan-400/50 overflow-hidden">
       {/* Header */}
       <div className="px-6 py-4 border-b border-cyan-400/50 flex-shrink-0">
         <h3 className="text-2xl font-mono text-cyan-400 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
@@ -1548,7 +1548,7 @@ const UpdateProfile = ({ onClose }: { onClose: () => void }) => {
   );
 
   return (
-    <div className="max-w-md w-full mx-auto bg-slate-900/80 backdrop-blur-md rounded-2xl border border-cyan-400/50 text-white">
+    <div className="max-w-md w-full mx-auto text-white">
       {isEditing ? renderEditForm() : renderProcessingSteps()}
 
       {/* Image Cropper Modal using common Modal component */}

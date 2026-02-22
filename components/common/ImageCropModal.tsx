@@ -93,7 +93,7 @@ const ImageCropModal: React.FC<ImageCropModalProps> = ({
 
   return (
     <Modal isOpen={isOpen} onClose={handleClose} hideCloseButton={false}>
-      <div className="bg-slate-900 border border-cyan-400/50 rounded-2xl w-full max-w-2xl shadow-2xl flex flex-col h-[85vh]">
+      <div className="bg-slate-900 border-y sm:border border-cyan-400/50 sm:rounded-2xl w-full max-w-2xl shadow-2xl flex flex-col h-[85vh]">
         {/* Header - Fixed */}
         <div className="px-6 py-3 border-b border-cyan-400/30 flex-shrink-0">
           <h3 className="text-lg font-semibold text-cyan-400 mb-1 font-mono bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">

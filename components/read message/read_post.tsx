@@ -48,7 +48,7 @@ function ReadPost({ message }: ReadPostProps) {
   // Return loading state
   if (loading) {
     return (
-      <div className="max-w-4xl mx-auto bg-background text-text pr-2 pl-3 sm:px-6">
+      <div className="max-w-4xl mx-auto bg-background text-text px-0 sm:px-6">
         <div className="bg-gradient-to-br from-slate-900 via-cyan-900/20 to-slate-900 backdrop-blur-xl rounded-2xl overflow-hidden border border-cyan-400/30 shadow-2xl shadow-cyan-400/20 animate-pulse">
           <div className="h-32 bg-gradient-to-r from-cyan-400/10 to-blue-400/10 rounded-t-2xl"></div>
           <div className="p-6 space-y-4">
@@ -64,7 +64,7 @@ function ReadPost({ message }: ReadPostProps) {
   // Return error state
   if (error || !postData) {
     return (
-      <div className="max-w-4xl mx-auto bg-background text-text pr-2 pl-3 sm:px-6">
+      <div className="max-w-4xl mx-auto bg-background text-text px-0 sm:px-6">
         <div className="bg-gradient-to-br from-slate-900 via-red-900/20 to-slate-900 backdrop-blur-xl rounded-2xl overflow-hidden border border-red-400/30 shadow-2xl shadow-red-400/20 p-6">
           <div className="flex items-center gap-3 text-red-400">
             <div className="w-8 h-8 rounded-full bg-red-400/20 flex items-center justify-center">
@@ -155,8 +155,8 @@ function ReadPost({ message }: ReadPostProps) {
    */
 
   return (
-    <div className="max-w-4xl mx-auto bg-background text-text pr-2 pl-3 sm:px-6">
-      <div className="bg-gradient-to-br from-slate-900 via-cyan-900/20 to-slate-900 backdrop-blur-xl rounded-2xl overflow-hidden border border-cyan-400/30 shadow-2xl shadow-cyan-400/20">
+    <div className="max-w-4xl mx-auto bg-background text-text px-0 sm:px-6">
+      <div className="bg-gradient-to-br from-slate-900 via-cyan-900/20 to-slate-900 backdrop-blur-xl sm:rounded-2xl overflow-hidden border-y sm:border border-cyan-400/30 shadow-2xl shadow-cyan-400/20">
         {/* Header with enhanced styling - Mobile optimized */}
         <div className="px-4 py-3 sm:px-6 sm:py-4 border-b border-cyan-400/30 bg-gradient-to-r from-cyan-400/5 to-blue-400/5">
           <div className="flex items-center justify-between transition-all duration-300 hover:opacity-90">
@@ -169,7 +169,7 @@ function ReadPost({ message }: ReadPostProps) {
 
         {/* Content area with enhanced styling - Mobile optimized */}
         <div className="p-4 sm:p-6 bg-gradient-to-b from-transparent to-slate-800/20">
-          <div className="mb-6">
+          <div className="mb-4 sm:mb-6">
             <p className="mb-4 text-white whitespace-pre-line text-base sm:text-lg leading-relaxed hover:text-cyan-300 transition-all duration-300 font-light bg-gradient-to-r from-white/90 to-white/70 bg-clip-text">
               <LinkAndHashtagReader message={postData?.Message || ""} />
             </p>
@@ -252,13 +252,11 @@ function ReadPost({ message }: ReadPostProps) {
 
       {isTipModalOpen && (
         <Modal isOpen={isTipModalOpen} onClose={closeTipModal}>
-          <div className="bg-gradient-to-br from-slate-900 via-cyan-900/20 to-slate-900 backdrop-blur-xl p-4 sm:p-6 rounded-2xl border border-cyan-400/30 shadow-2xl shadow-cyan-400/20">
-            <Tip
-              onClose={closeTipModal}
-              author={selectedAuthor}
-              topicId={selectedTopicId}
-            />
-          </div>
+          <Tip
+            onClose={closeTipModal}
+            author={selectedAuthor}
+            topicId={selectedTopicId}
+          />
         </Modal>
       )}
     </div>

@@ -53,7 +53,7 @@ const ReadRepost = ({
   return (
     <div className="max-w-4xl mx-auto bg-background text-text group">
       {/* Repost Header with User Info and Timestamp - Mobile optimized */}
-      <div className="bg-gradient-to-br from-slate-900 via-cyan-900/20 to-slate-900 backdrop-blur-xl rounded-t-2xl border-l border-r border-t border-cyan-400/30 px-3 sm:px-6 py-3 sm:py-4 group-hover:-translate-y-[1px] transition-transform">
+      <div className="bg-gradient-to-br from-slate-900 via-cyan-900/20 to-slate-900 backdrop-blur-xl sm:rounded-t-2xl border-y sm:border-l sm:border-r sm:border-t border-cyan-400/30 px-3 sm:px-6 py-3 sm:py-4 group-hover:-translate-y-[1px] transition-transform">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div className="flex items-center gap-3 sm:gap-4">
             <div className="transform-gpu group-hover:scale-[1.02] transition-transform">
@@ -71,8 +71,8 @@ const ReadRepost = ({
       </div>
 
       {/* Main Content - Mobile optimized */}
-      <div className="bg-gradient-to-b from-slate-900/60 to-slate-800/60 backdrop-blur-sm rounded-b-2xl border-l border-r border-b border-cyan-400/30 group-hover:bg-slate-900/70 transition-colors">
-        <div className="pt-2 group-hover:translate-y-[1px] transition-transform">
+      <div className="bg-gradient-to-b from-slate-900/60 to-slate-800/60 backdrop-blur-sm sm:rounded-b-2xl border-b sm:border-l sm:border-r sm:border-b border-cyan-400/30 group-hover:bg-slate-900/70 transition-colors">
+        <div className="pt-0 sm:pt-2 group-hover:translate-y-[1px] transition-transform">
           {renderContent()}
         </div>
       </div>

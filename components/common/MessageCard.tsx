@@ -81,21 +81,41 @@ const MessageCard: React.FC<MessageCardProps> = ({
   const config = typeConfig[messageType];
   const IconComponent = config.icon;
 
-  // Format timestamp
+  // Format timestamp - Twitter-style
   const formatTimestamp = (ts: string) => {
     try {
       const date = new Date(parseInt(ts) / 1000000);
       const now = new Date();
+      const currentYear = now.getFullYear();
+      const messageYear = date.getFullYear();
+
       const diffMs = now.getTime() - date.getTime();
       const diffMins = Math.floor(diffMs / 60000);
       const diffHours = Math.floor(diffMs / 3600000);
       const diffDays = Math.floor(diffMs / 86400000);
 
-      if (diffMins < 1) return "Just now";
-      if (diffMins < 60) return `${diffMins}m ago`;
-      if (diffHours < 24) return `${diffHours}h ago`;
-      if (diffDays < 7) return `${diffDays}d ago`;
-      return date.toLocaleDateString();
+      // Less than 1 minute: show time
+      if (diffMins < 1) {
+        return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+      }
+
+      // Less than 1 hour: show minutes ago (e.g., "30m")
+      if (diffMins < 60) {
+        return `${diffMins}m`;
+      }
+
+      // Less than 24 hours: show hours ago (e.g., "4h")
+      if (diffHours < 24) {
+        return `${diffHours}h`;
+      }
+
+      // Same year: show "Month Day" (e.g., "Feb 21")
+      if (messageYear === currentYear) {
+        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      }
+
+      // Previous years: show "Month Day, Year" (e.g., "Mar 3, 2025")
+      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     } catch {
       return "Unknown";
     }
@@ -105,7 +125,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
     <div className={`relative group ${className}`}>
       {/* Enhanced message container */}
       <div
-        className={`relative bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-sm rounded-2xl p-5 border ${config.borderColor} transition-all duration-300 hover:shadow-lg ${config.shadowColor} hover:scale-[1.01] active:scale-[0.99]`}
+        className={`relative bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-sm sm:rounded-2xl p-5 border-y sm:border ${config.borderColor} transition-all duration-300 hover:shadow-lg ${config.shadowColor} hover:scale-[1.01] active:scale-[0.99]`}
       >
         {/* Message type indicator with icon */}
         <div

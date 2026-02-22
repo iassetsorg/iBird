@@ -56,8 +56,8 @@ function ReadAd({ message }: ReadAdProps) {
 
     if (loading) {
         return (
-            <div className="max-w-4xl mx-auto bg-background text-text pr-2 pl-3 sm:px-6">
-                <div className="bg-gradient-to-br from-slate-900 via-yellow-900/20 to-slate-900 backdrop-blur-xl rounded-2xl overflow-hidden border border-yellow-400/30 shadow-2xl shadow-yellow-400/20 animate-pulse">
+            <div className="max-w-4xl mx-auto bg-background text-text px-0 sm:px-6">
+                <div className="bg-gradient-to-br from-slate-900 via-yellow-900/20 to-slate-900 backdrop-blur-xl sm:rounded-2xl overflow-hidden border-y sm:border border-yellow-400/30 shadow-2xl shadow-yellow-400/20 animate-pulse">
                     <div className="h-32 bg-gradient-to-r from-yellow-400/10 to-orange-400/10 rounded-t-2xl"></div>
                     <div className="p-6 space-y-4">
                         <div className="h-4 bg-yellow-400/20 rounded-full w-3/4"></div>
@@ -71,8 +71,8 @@ function ReadAd({ message }: ReadAdProps) {
 
     if (error || !postData) {
         return (
-            <div className="max-w-4xl mx-auto bg-background text-text pr-2 pl-3 sm:px-6">
-                <div className="bg-gradient-to-br from-slate-900 via-red-900/20 to-slate-900 backdrop-blur-xl rounded-2xl overflow-hidden border border-red-400/30 shadow-2xl shadow-red-400/20 p-6">
+            <div className="max-w-4xl mx-auto bg-background text-text px-0 sm:px-6">
+                <div className="bg-gradient-to-br from-slate-900 via-red-900/20 to-slate-900 backdrop-blur-xl sm:rounded-2xl overflow-hidden border-y sm:border border-red-400/30 shadow-2xl shadow-red-400/20 p-6">
                     <div className="flex items-center gap-3 text-red-400">
                         <span className="font-mono font-medium">Failed to load ad</span>
                     </div>
@@ -124,8 +124,8 @@ function ReadAd({ message }: ReadAdProps) {
     };
 
     return (
-        <div className="max-w-4xl mx-auto bg-background text-text pr-2 pl-3 sm:px-6">
-            <div className="bg-gradient-to-br from-slate-900 via-yellow-900/10 to-slate-900 backdrop-blur-xl rounded-2xl overflow-hidden border border-yellow-400/30 shadow-2xl shadow-yellow-400/10 group hover:border-yellow-400/50 transition-all duration-300">
+        <div className="max-w-4xl mx-auto bg-background text-text px-0 sm:px-6">
+            <div className="bg-gradient-to-br from-slate-900 via-yellow-900/10 to-slate-900 backdrop-blur-xl sm:rounded-2xl overflow-hidden border-y sm:border border-yellow-400/30 shadow-2xl shadow-yellow-400/10 group hover:border-yellow-400/50 transition-all duration-300">
                 {/* Header - Ad specific styling */}
                 <div className="px-4 py-3 sm:px-6 sm:py-4 border-b border-yellow-400/20 bg-gradient-to-r from-yellow-400/5 to-orange-400/5">
                     <div className="flex items-center justify-between">
@@ -157,7 +157,7 @@ function ReadAd({ message }: ReadAdProps) {
                         </div>
                     )}
 
-                    <div className="p-4 sm:p-6 space-y-3">
+                    <div className="p-4 sm:p-6 space-y-2 sm:space-y-3">
                         {/* Headline */}
                         {adContent.title && (
                             <h3 className="text-xl sm:text-2xl font-bold text-white leading-tight font-sans tracking-tight">
@@ -223,13 +223,11 @@ function ReadAd({ message }: ReadAdProps) {
 
             {isTipModalOpen && (
                 <Modal isOpen={isTipModalOpen} onClose={closeTipModal}>
-                    <div className="bg-gradient-to-br from-slate-900 via-yellow-900/20 to-slate-900 backdrop-blur-xl p-4 sm:p-6 rounded-2xl border border-yellow-400/30 shadow-2xl shadow-yellow-400/20">
-                        <Tip
-                            onClose={closeTipModal}
-                            author={selectedAuthor}
-                            topicId={selectedTopicId}
-                        />
-                    </div>
+                    <Tip
+                        onClose={closeTipModal}
+                        author={selectedAuthor}
+                        topicId={selectedTopicId}
+                    />
                 </Modal>
             )}
         </div>

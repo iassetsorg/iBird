@@ -55,7 +55,7 @@ const SimpleModal: FC<SimpleModalProps> = ({ isOpen, onClose, children }) => {
         className="relative max-w-3xl mx-auto z-[100000] w-full max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="relative bg-slate-900 rounded-2xl shadow-2xl text-white m-4 overflow-hidden">
+        <div className="relative bg-slate-900 sm:rounded-2xl shadow-2xl text-white m-0 sm:m-4 overflow-hidden">
           {/* Close button */}
           <button
             type="button"

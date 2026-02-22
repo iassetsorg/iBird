@@ -148,7 +148,7 @@ function UserExplorer({ userAddress }: UserExplorerProps) {
         ref={scrollRef}
         onScroll={handleScroll}
         className="relative w-full h-screen text-text shadow-xl
-        overflow-y-scroll"
+        overflow-y-scroll px-0 sm:px-6"
       >
         {/* Pull to refresh indicator */}
         {isRefreshing && (
@@ -206,7 +206,7 @@ function UserExplorer({ userAddress }: UserExplorerProps) {
         )}
 
         {/* Message list */}
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {allMessages
             .filter((message) => {
               // Only render supported message types with valid required fields

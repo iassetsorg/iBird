@@ -222,7 +222,7 @@ const ChannelList = ({
       <div
         key={`${channel.Channel}-${index}`}
         onClick={() => handleChannelClick(channel)}
-        className="group relative bg-gradient-to-br from-slate-800/70 to-slate-900/70 backdrop-blur-md rounded-2xl p-5 border border-cyan-400/20 hover:border-cyan-400/50 transition-all duration-300 cursor-pointer hover:scale-[1.01] hover:shadow-2xl hover:shadow-cyan-400/30 overflow-hidden active:scale-[0.99]"
+        className="group relative bg-gradient-to-br from-slate-800/70 to-slate-900/70 backdrop-blur-md sm:rounded-2xl p-5 border-y sm:border border-cyan-400/20 hover:border-cyan-400/50 transition-all duration-300 cursor-pointer hover:scale-[1.01] hover:shadow-2xl hover:shadow-cyan-400/30 overflow-hidden active:scale-[0.99]"
       >
         {/* Animated background gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

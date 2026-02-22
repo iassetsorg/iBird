@@ -16,6 +16,7 @@
 // ============================================================================
 
 import React, { useState, useEffect, useMemo } from "react";
+import { createPortal } from "react-dom";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import {
@@ -125,6 +126,11 @@ const UnifiedChatList = ({
     const [searchTerm, setSearchTerm] = useState("");
     const [filterType, setFilterType] = useState<FilterType>("all");
     const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
     // Find by ID state
     const [showFindById, setShowFindById] = useState(false);
@@ -519,7 +525,7 @@ const UnifiedChatList = ({
             <div
                 key={`${item.type}-${topicId}-${index}`}
                 onClick={() => handleItemClick(item)}
-                className={`group relative bg-gradient-to-br from-slate-800/70 to-slate-900/70 backdrop-blur-md rounded-2xl p-5 ${themeColors.border} transition-all duration-300 cursor-pointer hover:scale-[1.01] hover:shadow-2xl ${themeColors.shadow} overflow-hidden active:scale-[0.99]`}
+                className={`group relative bg-gradient-to-br from-slate-800/70 to-slate-900/70 backdrop-blur-md sm:rounded-2xl p-5 border-y sm:border ${themeColors.border} transition-all duration-300 cursor-pointer hover:scale-[1.01] hover:shadow-2xl ${themeColors.shadow} overflow-hidden active:scale-[0.99]`}
             >
                 {/* Animated background gradient */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${themeColors.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
@@ -763,8 +769,43 @@ const UnifiedChatList = ({
 
     const totalChats = channels.length + groups.length + followedChannels.length + followedGroups.length;
 
+    // Only show floating buttons if user has owned channels or groups
+    const hasOwnedChats = channels.length + groups.length > 0;
+
+    const floatingButtons = hasOwnedChats ? (
+        <div className="fixed bottom-6 left-6 sm:bottom-10 sm:left-10 z-50 flex flex-row gap-3">
+            {/* Create Channel Button */}
+            <button
+                onClick={() => handleCreateNew("channel")}
+                className="px-4 py-3 bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-semibold rounded-2xl hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-2 font-mono text-sm shadow-2xl shadow-cyan-400/25 border border-cyan-400/40 hover:border-cyan-400/70 hover:shadow-cyan-400/40"
+                title="Create Channel"
+            >
+                <div className="flex items-center">
+                    <RiMessage3Line className="text-lg" />
+                    <RiAddLine className="text-base -ml-0.5" />
+                </div>
+                <span className="hidden sm:inline">Channel</span>
+            </button>
+
+            {/* Create Group Button */}
+            <button
+                onClick={() => handleCreateNew("group")}
+                className="px-4 py-3 bg-gradient-to-r from-purple-400 to-pink-500 text-white font-semibold rounded-2xl hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-2 font-mono text-sm shadow-2xl shadow-purple-400/25 border border-purple-400/40 hover:border-purple-400/70 hover:shadow-purple-400/40"
+                title="Create Group"
+            >
+                <div className="flex items-center">
+                    <RiGroupLine className="text-lg" />
+                    <RiAddLine className="text-base -ml-0.5" />
+                </div>
+                <span className="hidden sm:inline">Group</span>
+            </button>
+        </div>
+    ) : null;
+
     return (
         <div className={`w-full ${className}`}>
+            {isMounted && typeof document !== "undefined" && createPortal(floatingButtons, document.body)}
+
             {/* Loading State */}
             {isLoading && renderLoading()}
 
@@ -780,7 +821,7 @@ const UnifiedChatList = ({
                     {renderSearchAndFilters()}
 
                     {/* Chat Items */}
-                    <div className="space-y-3">
+                    <div className="space-y-2 sm:space-y-3">
                         {unifiedItems.length > 0 ? (
                             unifiedItems.map((item, index) => renderChatItem(item, index))
                         ) : (
@@ -808,35 +849,6 @@ const UnifiedChatList = ({
                     </div>
                 </div>
             )}
-
-            {/* Floating Action Buttons - Fixed at bottom right */}
-            <div className="fixed bottom-8 right-6 z-50 flex flex-row gap-3">
-                {/* Create Channel Button */}
-                <button
-                    onClick={() => handleCreateNew("channel")}
-                    className="px-4 py-3 bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-semibold rounded-2xl hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-2 font-mono text-sm shadow-2xl shadow-cyan-400/25 border border-cyan-400/40 hover:border-cyan-400/70 hover:shadow-cyan-400/40"
-                    title="Create Channel"
-                >
-                    <div className="flex items-center">
-                        <RiMessage3Line className="text-lg" />
-                        <RiAddLine className="text-base -ml-0.5" />
-                    </div>
-                    <span className="hidden sm:inline">Channel</span>
-                </button>
-
-                {/* Create Group Button */}
-                <button
-                    onClick={() => handleCreateNew("group")}
-                    className="px-4 py-3 bg-gradient-to-r from-purple-400 to-pink-500 text-white font-semibold rounded-2xl hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-2 font-mono text-sm shadow-2xl shadow-purple-400/25 border border-purple-400/40 hover:border-purple-400/70 hover:shadow-purple-400/40"
-                    title="Create Group"
-                >
-                    <div className="flex items-center">
-                        <RiGroupLine className="text-lg" />
-                        <RiAddLine className="text-base -ml-0.5" />
-                    </div>
-                    <span className="hidden sm:inline">Group</span>
-                </button>
-            </div>
 
             {/* Create Channel Modal */}
             <Modal isOpen={showCreateChannel} onClose={() => setShowCreateChannel(false)}>

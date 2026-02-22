@@ -131,7 +131,7 @@ const ReadMediaFile: React.FC<Props> = ({ cid }) => {
                 onLoadedData={() => setIsLoading(false)}
                 onError={() => {
                   setMediaElement(
-                    <div className="w-full p-4 text-center bg-red-50 text-red-700 rounded-lg border border-red-200">
+                    <div className="w-full h-full flex items-center justify-center p-4 text-center bg-red-500/10 text-red-400 rounded-lg border border-red-500/20">
                       Failed to load video content
                     </div>
                   );
@@ -145,11 +145,11 @@ const ReadMediaFile: React.FC<Props> = ({ cid }) => {
         } else if (mimeType.startsWith("audio/")) {
           // Audio player with modern styling
           setMediaElement(
-            <div className="w-full bg-gray-50 dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+            <div className="w-full bg-slate-800/50 rounded-lg p-6 border border-slate-700">
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
+                <div className="w-10 h-10 bg-cyan-500/20 rounded-full flex items-center justify-center">
                   <svg
-                    className="w-5 h-5 text-blue-600 dark:text-blue-400"
+                    className="w-5 h-5 text-cyan-400"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -175,7 +175,7 @@ const ReadMediaFile: React.FC<Props> = ({ cid }) => {
                 onLoadedData={() => setIsLoading(false)}
                 onError={() => {
                   setMediaElement(
-                    <div className="w-full p-4 text-center bg-red-50 text-red-700 rounded-lg border border-red-200">
+                    <div className="w-full p-4 text-center bg-red-500/10 text-red-400 rounded-lg border border-red-500/20">
                       Failed to load audio content
                     </div>
                   );
@@ -190,7 +190,7 @@ const ReadMediaFile: React.FC<Props> = ({ cid }) => {
         } else {
           // Unsupported media type
           setMediaElement(
-            <div className="w-full p-6 text-center bg-yellow-50 text-yellow-800 rounded-lg border border-yellow-200">
+            <div className="w-full p-6 text-center bg-yellow-500/10 text-yellow-400 rounded-lg border border-yellow-500/20">
               <div className="flex items-center justify-center gap-2 mb-2">
                 <svg
                   className="w-5 h-5"
@@ -209,7 +209,7 @@ const ReadMediaFile: React.FC<Props> = ({ cid }) => {
               <a
                 href={newObjectURL}
                 download
-                className="inline-block mt-3 px-4 py-2 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition-colors"
+                className="inline-block mt-3 px-4 py-2 bg-yellow-500/20 text-yellow-400 rounded-md hover:bg-yellow-500/30 transition-colors"
               >
                 Download File
               </a>
@@ -222,7 +222,7 @@ const ReadMediaFile: React.FC<Props> = ({ cid }) => {
         console.error("Error fetching media:", error);
         clearTimeout(timeoutId);
         setMediaElement(
-          <div className="w-full p-6 text-center bg-red-50 text-red-700 rounded-lg border border-red-200">
+          <div className="w-full h-full min-h-[40px] flex flex-col items-center justify-center p-4 text-center bg-red-500/10 text-red-400 rounded-lg border border-red-500/20">
             <div className="flex items-center justify-center gap-2 mb-2">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                 <path
@@ -240,7 +240,7 @@ const ReadMediaFile: React.FC<Props> = ({ cid }) => {
             </p>
             <button
               onClick={() => window.open(url, "_blank")}
-              className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
+              className="px-4 py-2 bg-red-500/20 text-red-400 rounded-md hover:bg-red-500/30 transition-colors text-xs"
             >
               Open in New Tab
             </button>
@@ -264,14 +264,9 @@ const ReadMediaFile: React.FC<Props> = ({ cid }) => {
   // Loading state
   if (isLoading && cid) {
     return (
-      <div className="media-preview w-full">
-        <div className="w-full p-8 text-center bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-          <div className="inline-flex items-center gap-3">
-            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600"></div>
-            <span className="text-gray-600 dark:text-gray-400">
-              Loading media content...
-            </span>
-          </div>
+      <div className="media-preview w-full h-full min-h-[40px]">
+        <div className="w-full h-full bg-slate-800/50 animate-pulse flex items-center justify-center">
+          <div className="w-5 h-5 border-2 border-cyan-400/30 border-t-cyan-400 rounded-full animate-spin"></div>
         </div>
       </div>
     );
@@ -280,25 +275,22 @@ const ReadMediaFile: React.FC<Props> = ({ cid }) => {
   // Empty state
   if (!cid) {
     return (
-      <div className="media-preview w-full">
-        <div className="w-full p-8 text-center bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-          <div className="flex items-center justify-center gap-2 text-gray-500 dark:text-gray-400">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fillRule="evenodd"
-                d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <span>No media content available</span>
-          </div>
+      <div className="media-preview w-full h-full min-h-[40px]">
+        <div className="w-full h-full bg-slate-800/30 flex items-center justify-center text-slate-500">
+          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              fillRule="evenodd"
+              d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+              clipRule="evenodd"
+            />
+          </svg>
         </div>
       </div>
     );
   }
 
   // Container with consistent width and media element
-  return <div className="media-preview w-full">{mediaElement}</div>;
+  return <div className="media-preview w-full h-full">{mediaElement}</div>;
 };
 
 export default ReadMediaFile;

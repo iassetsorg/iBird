@@ -293,7 +293,7 @@ function ReadThread({
   }, [highlightedCommentId, scrollToCommentId]);
 
   return (
-    <div className="max-w-4xl mx-auto bg-transparent text-text pr-2 pl-3 sm:px-6">
+    <div className="max-w-4xl mx-auto bg-transparent text-text px-0 sm:px-6">
       {loading && allMessages.length === 0 && (
         <div className="flex flex-col justify-center items-center min-h-[400px] space-y-4 bg-gradient-to-br from-slate-900 via-cyan-900/20 to-slate-900 backdrop-blur-xl rounded-2xl border border-cyan-400/30 shadow-2xl shadow-cyan-400/20">
           <div className="p-4 rounded-xl bg-cyan-400/10">
@@ -311,7 +311,7 @@ function ReadThread({
       {!loading && threadPosts.length > 0 && (
         <div className="space-y-4 sm:space-y-6">
           {/* Thread Posts Section - Connected Style */}
-          <div className="bg-gradient-to-br from-slate-900 via-cyan-900/20 to-slate-900 backdrop-blur-xl rounded-2xl overflow-hidden border border-cyan-400/30 shadow-2xl shadow-cyan-400/20">
+          <div className="bg-gradient-to-br from-slate-900 via-cyan-900/20 to-slate-900 backdrop-blur-xl sm:rounded-2xl overflow-hidden border-y sm:border border-cyan-400/30 shadow-2xl shadow-cyan-400/20">
             {/* Thread Author Header - Only once at top */}
             <div className="px-4 py-3 sm:px-6 sm:py-4 border-b border-cyan-400/30">
               <div className="flex items-center justify-between transition-colors hover:opacity-90">

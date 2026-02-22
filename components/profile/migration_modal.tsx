@@ -546,8 +546,8 @@ const MigrationModal: React.FC<MigrationModalProps> = ({
   );
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="max-w-md w-full mx-auto bg-slate-900/90 backdrop-blur-md rounded-2xl border border-cyan-400/50 text-white shadow-2xl shadow-cyan-400/20">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-0 sm:p-4">
+      <div className="max-w-md w-full mx-auto bg-slate-900/90 backdrop-blur-md sm:rounded-2xl border-y sm:border border-cyan-400/50 text-white shadow-2xl shadow-cyan-400/20">
         {hasStarted ? renderMigrationProgress() : renderPreMigrationInfo()}
       </div>
     </div>

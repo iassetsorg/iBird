@@ -843,7 +843,7 @@ const ReplayPoll: React.FC<ReplayProps> = ({
    */
   const renderReplyForm = () => (
     <Modal isOpen={showReplyModal} onClose={() => setShowReplyModal(false)}>
-      <div className="flex flex-col max-h-[80vh] max-w-lg w-full bg-gradient-to-br from-slate-900 via-cyan-900/20 to-slate-900 backdrop-blur-md rounded-2xl overflow-hidden border border-cyan-400/30 shadow-2xl shadow-cyan-400/20">
+      <div className="flex flex-col max-h-[80vh] max-w-lg w-full bg-gradient-to-br from-slate-900 via-cyan-900/20 to-slate-900 backdrop-blur-md sm:rounded-2xl overflow-hidden border-y sm:border border-cyan-400/30 shadow-2xl shadow-cyan-400/20">
         {/* Header */}
         <div className="px-6 py-4 border-b border-cyan-400/30 bg-gradient-to-r from-cyan-400/5 to-blue-400/5">
           <h3 className="text-2xl font-mono text-cyan-400 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
@@ -1168,9 +1168,7 @@ const ReplayPoll: React.FC<ReplayProps> = ({
 
       {isTipModalOpen && (
         <Modal isOpen={isTipModalOpen} onClose={closeTipModal}>
-          <div className="bg-gradient-to-br from-slate-900 via-cyan-900/20 to-slate-900 backdrop-blur-md p-4 sm:p-6 rounded-2xl border border-cyan-400/30 shadow-2xl shadow-cyan-400/20">
-            <Tip onClose={closeTipModal} author={author} topicId={topicId} />
-          </div>
+          <Tip onClose={closeTipModal} author={author} topicId={topicId} />
         </Modal>
       )}
     </>

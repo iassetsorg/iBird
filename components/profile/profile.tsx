@@ -217,7 +217,7 @@ const Profile: React.FC = () => {
       />
 
       <div className="relative z-10 flex flex-col w-full h-full pt-14 sm:pt-16 lg:pt-18">
-        <div className="flex-1 w-full max-w-6xl mx-auto px-3 sm:px-4 lg:px-6 overflow-y-auto mt-2 sm:mt-3 lg:mt-4 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-slate-800/30 [&::-webkit-scrollbar-thumb]:bg-gradient-to-b [&::-webkit-scrollbar-thumb]:from-purple-500 [&::-webkit-scrollbar-thumb]:to-purple-600 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-2 [&::-webkit-scrollbar-thumb]:border-purple-400/30 [&::-webkit-scrollbar-corner]:bg-slate-900/50">
+        <div className="flex-1 w-full max-w-6xl mx-auto px-0 sm:px-4 lg:px-6 overflow-y-auto mt-2 sm:mt-3 lg:mt-4 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-slate-800/30 [&::-webkit-scrollbar-thumb]:bg-gradient-to-b [&::-webkit-scrollbar-thumb]:from-purple-500 [&::-webkit-scrollbar-thumb]:to-purple-600 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-2 [&::-webkit-scrollbar-thumb]:border-purple-400/30 [&::-webkit-scrollbar-corner]:bg-slate-900/50">
           {/* Enhanced Loading State */}
           {isLoading && (
             <div className="flex flex-col justify-center items-center h-full space-y-8">
@@ -381,7 +381,7 @@ const Profile: React.FC = () => {
             <div className="space-y-2 sm:space-y-3 lg:space-y-4 pb-2">
               {/* Twitter-style Banner Section - Only show if user has a banner */}
               {profileData.Banner && (
-                <div className="relative w-full rounded-xl sm:rounded-2xl overflow-hidden border border-cyan-400/30 shadow-2xl shadow-cyan-400/10">
+                <div className="relative w-full sm:rounded-2xl overflow-hidden border-y sm:border border-cyan-400/30 shadow-2xl shadow-cyan-400/10">
                   <img
                     src={`https://arweave.net/${profileData.Banner.replace(
                       "ar://",
@@ -397,7 +397,7 @@ const Profile: React.FC = () => {
               )}
 
               {/* Profile Information Card */}
-              <div className="relative bg-gradient-to-r from-slate-900/80 via-purple-900/50 to-slate-900/80 backdrop-blur-xl border border-cyan-400/30 rounded-xl sm:rounded-2xl p-3 sm:p-4 lg:p-5">
+              <div className="relative bg-gradient-to-r from-slate-900/80 via-purple-900/50 to-slate-900/80 backdrop-blur-xl border-y sm:border border-cyan-400/30 sm:rounded-2xl p-3 sm:p-4 lg:p-5">
                 {/* Glow effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/5 via-purple-500/5 to-pink-500/5 blur-xl" />
 
@@ -754,7 +754,7 @@ const Profile: React.FC = () => {
           {/* Ultra-Compact Section Modal */}
           {isSectionModalOpen && selectedModalContent && (
             <Modal isOpen={isSectionModalOpen} onClose={closeSectionModal}>
-              <div className="relative bg-gradient-to-br from-slate-900/90 via-purple-900/50 to-slate-900/90 backdrop-blur-xl border border-cyan-400/30 rounded-2xl p-3 max-w-5xl mx-auto shadow-2xl shadow-cyan-400/10 h-[85vh]">
+              <div className="relative bg-gradient-to-br from-slate-900/90 via-purple-900/50 to-slate-900/90 backdrop-blur-xl border-y sm:border border-cyan-400/30 sm:rounded-2xl p-3 max-w-5xl mx-auto shadow-2xl shadow-cyan-400/10 h-[85vh]">
                 {/* Glow effect */}
                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 via-purple-500/5 to-pink-500/5 rounded-2xl blur-xl" />
 

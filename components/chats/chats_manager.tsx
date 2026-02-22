@@ -77,7 +77,7 @@ function ChatsManager() {
             <div className="h-full w-full bg-slate-900/80 backdrop-blur-md">
                 {/* Unified Chat List View */}
                 {currentView.type === "list" && (
-                    <div className="h-[calc(100vh-12rem)] overflow-y-auto p-4 sm:p-6">
+                    <div className="h-[calc(100vh-12rem)] overflow-y-auto px-0 py-4 sm:p-6">
                         <UnifiedChatList
                             onChannelClick={handleChannelClick}
                             onGroupClick={handleGroupClick}

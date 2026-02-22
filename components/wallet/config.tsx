@@ -15,6 +15,7 @@ import {
   HederaMainnet,
   HederaTestnet,
 } from "@buidlerlabs/hashgraph-react-wallets/chains";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 /**
  * ReactWalletsProvider component that wraps the application with wallet connection capabilities
@@ -60,6 +61,7 @@ const ReactWalletsProvider: React.FC<{ children: React.ReactNode }> = ({
         MetamaskConnector, // Metamask wallet connector
       ]}
       chains={[selectedChain]} // Supported blockchain networks
+      LoadingFallback={LoadingSpinner}
     >
       {children}
     </HWBridgeProvider>

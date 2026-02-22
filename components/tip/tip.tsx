@@ -148,7 +148,7 @@ const Tip = ({
   const TokenOptions = Object.keys(tokenData) as Array<keyof typeof tokenData>;
 
   return (
-    <div className="max-w-md w-full mx-auto bg-slate-900 rounded-2xl shadow-2xl overflow-hidden border border-slate-700/50">
+    <div className="max-w-md w-full mx-auto bg-slate-900 sm:rounded-2xl shadow-2xl overflow-hidden border-y sm:border border-slate-700/50">
       {/* Header */}
       <div className="bg-gradient-to-r from-slate-800 to-slate-800/80 px-6 py-5 border-b border-slate-700/50">
         <div className="flex items-center gap-3">

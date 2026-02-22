@@ -50,7 +50,7 @@ const EmojiPickerPopup: React.FC<EmojiPickerPopupProps> = ({
       >
         <div className="relative max-w-md mx-auto">
           {/* Emoji Picker Container */}
-          <div className="relative border border-purple-400/30 rounded-2xl shadow-2xl shadow-purple-400/20 overflow-hidden backdrop-blur-md">
+          <div className="relative border-y sm:border border-purple-400/30 sm:rounded-2xl shadow-2xl shadow-purple-400/20 overflow-hidden backdrop-blur-md">
             {/* Animated Background - same as Hero */}
             <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 animate-gradient-shift bg-[length:400%_400%]" />
 

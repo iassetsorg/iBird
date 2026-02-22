@@ -123,7 +123,7 @@ export const NewMessage: FC<NewMessageProps> = ({
   }, []);
 
   const content = (
-    <div className="fixed bottom-24 left-6 z-50">
+    <div className="fixed bottom-6 left-6 sm:bottom-10 sm:left-10 z-50">
       {/* Enhanced floating action button with better visual feedback */}
       <div className="relative">
         {/* Pulse animation ring for attention */}

@@ -147,7 +147,7 @@ function Explorer() {
       <div
         ref={scrollRef}
         onScroll={handleScroll}
-        className="relative w-full h-[calc(100vh-4rem)] bg-background pt-4 px-0 sm:p-6 text-text
+        className="relative w-full h-[calc(100vh-4rem)] bg-background pt-4 px-0 sm:px-6 text-text
          overflow-y-scroll"
       >
         {/* Pull to refresh indicator - commented out as isRefreshing is unused */}
@@ -205,7 +205,7 @@ function Explorer() {
         )}
 
         {/* Message list */}
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {allMessages
             .filter((message: Message) => {
               // Only render supported message types with valid required fields

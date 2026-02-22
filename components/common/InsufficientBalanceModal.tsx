@@ -37,7 +37,7 @@ const InsufficientBalanceModal: FC<InsufficientBalanceModalProps> = ({
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
             <div
-                className={`flex flex-col items-center p-8 w-full max-w-md mx-auto rounded-2xl relative bg-gradient-to-br ${gradientColors} backdrop-blur-xl ${borderColor} border shadow-2xl`}
+                className={`flex flex-col items-center p-8 w-full max-w-md mx-auto sm:rounded-2xl relative bg-gradient-to-br ${gradientColors} backdrop-blur-xl ${borderColor} border-y sm:border shadow-2xl`}
             >
                 {/* Warning Icon */}
                 <div

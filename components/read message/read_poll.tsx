@@ -263,7 +263,7 @@ function ReadPoll({ topicId, highlightedCommentId, scrollToCommentId }: {
   };
 
   return (
-    <div className="max-w-4xl mx-auto bg-background text-text px-2 sm:px-6">
+    <div className="max-w-4xl mx-auto bg-background text-text px-0 sm:px-6">
       {loading && allMessages.length === 0 && (
         <div className="flex flex-col justify-center items-center min-h-[400px] space-y-4 bg-gradient-to-br from-slate-900 via-cyan-900/20 to-slate-900 backdrop-blur-xl rounded-2xl border border-cyan-400/30 shadow-2xl shadow-cyan-400/20">
           <Spinner />
@@ -343,7 +343,7 @@ function ReadPoll({ topicId, highlightedCommentId, scrollToCommentId }: {
                 return (
                   <div
                     key={idx}
-                    className="bg-gradient-to-br from-slate-900 via-cyan-900/20 to-slate-900 backdrop-blur-xl rounded-2xl overflow-hidden border border-cyan-400/30 shadow-2xl shadow-cyan-400/20 p-3 sm:p-6"
+                    className="bg-gradient-to-br from-slate-900 via-cyan-900/20 to-slate-900 backdrop-blur-xl sm:rounded-2xl overflow-hidden border-y sm:border border-cyan-400/30 shadow-2xl shadow-cyan-400/20 p-3 sm:p-6"
                   >
                     <div className="flex items-center justify-between mb-3 sm:mb-4 transition-colors hover:opacity-90">
                       <UserProfile userAccountId={messageDetails.author} />

@@ -1086,7 +1086,7 @@ const SendNewThread = ({
   );
 
   return (
-    <div className="max-w-lg mx-auto bg-background rounded-lg shadow-xl p-3 text-text">
+    <div className="max-w-lg mx-auto w-full">
       {isEditing ? renderEditForm() : renderProcessingSteps()}
     </div>
   );
